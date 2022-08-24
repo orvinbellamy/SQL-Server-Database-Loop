@@ -1,0 +1,43 @@
+{
+    "operation1": {
+        "table_name": "table_name1",
+        "header": 
+            ["column1", "column2", "column3", "column4", "column5"],
+        "query_db": "production_db",
+        "query":
+            "SELECT * FROM table_name1",
+        "preprocess":{
+            "functions": ["composite_key"],
+            "arguments": [
+                ["compkey", "db", "column1"],
+                ["userID_comp", "db", "column2"],
+                ["appID_comp", "db", "column3"]
+                ]
+        },
+        "convert_dic":
+             {"column1": "string", "column2": "string", "column3": "string","column4": "string","column5": "string", 
+                "db": "string", "compkey": "string", "userID_comp": "string", "appID_comp": "string"},
+        "alter_query":
+            ["ALTER TABLE table_name1 ALTER COLUMN column4 DATE"]
+    },
+
+    "operation2":{
+        "table_name": "table_name2",
+        "header": 
+            ["column1", "column2", "column3", "column4", "column5", "text"],
+        "query_db": "dev_db",
+        "query":
+            "SELECT [text] FROM table_name2",
+        "preprocess": {
+            "functions": ["split_column"],
+            "arguments": [
+                [[["column1", "column2", "column3", "column4", "column5"],"text"]]
+            ]
+        },
+        "convert_dic":
+            {"column1": "string", "column2": "string", "column3": "string", "column4": "int",
+            "column5": "string", "text": "string"},
+        "alter_query":
+            [""]           
+    }
+}
